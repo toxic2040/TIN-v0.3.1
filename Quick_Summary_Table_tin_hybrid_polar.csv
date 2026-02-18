@@ -1,0 +1,5 @@
+Configuration,South Pole Coverage,Far-Side Coverage
+Pure polar (6 sats @ 400 km),99.6%,46.4%
+Pure polar (8 sats @ 400 km),100.0%,54.4%
+Hybrid: 6 polar + Pathfinder,99.9%,63.2%
+Hybrid: 8 polar + Pathfinder,100.0%,68.5%
