@@ -1,1 +1,17 @@
+# Python
+venv_tin/
+__pycache__/
+*.pyc
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+
+# Old versions and working files
+TINDocs/
+TINFiles/
+TINprojectv0.1/
 TIN-Heliocentric-Relays/
+filesOdd/
+*.backup
