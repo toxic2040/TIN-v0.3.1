@@ -1,0 +1,104 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{TIN v0.3.5 Technical Memo \\
+Hybrid Polar Relay Constellation + Lunar Pathfinder ELFO Hub \\
+for Artemis South Pole \& Far-Side Coverage}
+
+\author{Independent Proposer \\
+toxic2040}
+
+\date{February 19, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Executive Summary}
+
+TIN v0.3.5 delivers near-perfect south-pole coverage (99.9–100.0 \%) and major far-side boost (63.2–68.5 \%) using a hybrid architecture: 6–8 smallsat relays in 400 km circular 90° polar orbits + the real Lunar Pathfinder ELFO (a=5740 km, e=0.58, i=55°, frozen arg peri ~86°, perilune over south pole) as primary intelligent DTN/AI routing hub. Combined with CCSDS DTN, this supports Artemis, commercial landers, PSR ISRU, and far-side operations.
+
+Key results (28-day simulation, elev >5°):
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & South Pole (\%) & Far-Side (\%) \\
+\midrule
+Pure Polar 6 sats @ 400 km & 99.6 & 46.4 \\
+Pure Polar 8 sats @ 400 km & 100.0 & 54.4 \\
+\textbf{Hybrid 6 polar + Pathfinder} & \textbf{99.9} & \textbf{63.2} \\
+\textbf{Hybrid 8 polar + Pathfinder} & \textbf{100.0} & \textbf{68.5} \\
+\bottomrule
+\end{tabular}
+\caption{v0.3.5 Hybrid results}
+\end{table}
+
+GitHub: https://github.com/toxic2040/TIN-v0.3.1
+
+\section{Baseline Constellation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Parameter & 6-sat baseline & 8-sat option & 500 km option \\
+\midrule
+Altitude & 400 km & 400 km & 500 km \\
+Inclination & 90° & 90° & 90° \\
+\# Relays & 6 & 8 & 6 \\
+RAAN spacing & 60° & 45° & 60° \\
+South-pole coverage & 99.6\% & 100.0\% & 100.0\% \\
+\bottomrule
+\end{tabular}
+\caption{TIN v0.3.1 locked baselines (pure polar)}
+\end{table}
+
+\section{Hybrid Coverage Results (v0.3.5)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{tin_hybrid_6polar_ELFO_south.png}
+\caption{Hybrid 6 Polar + ELFO — South Pole Coverage (99.9 \%)}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{tin_hybrid_8polar_ELFO_south.png}
+\caption{Hybrid 8 Polar + ELFO — South Pole Coverage (100.0 \%)}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{tin_hybrid_6polar_ELFO_far.png}
+\caption{Hybrid 6 Polar + ELFO — Far-Side Coverage (63.2 \%)}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{tin_hybrid_8polar_ELFO_far.png}
+\caption{Hybrid 8 Polar + ELFO — Far-Side Coverage (68.5 \%)}
+\end{figure}
+
+The ELFO perilune passes provide the critical far-side visibility boost while the polar constellation guarantees near-perfect south-pole service. This hybrid polar + frozen-elliptical architecture is deliberately generalizable to Mars, Venus, outer-planet moons, and solar-polar networks.
+
+\section{Next Steps (Phase I Scope)}
+
+\begin{itemize}
+\item Integrate Lunar Pathfinder ELFO as hybrid anchor node (completed in v0.3.5)
+\item ION DTN bundle routing simulations
+\item Far-side + PSR gap analysis
+\item SWaP/cost model (ESPA-class rideshare)
+\item Open-source dataset release
+\end{itemize}
+
+Full CLI tool and raw simulation data available in the GitHub repo.
+
+\end{document}
