@@ -1,0 +1,4 @@
+Scenario,Distance,Latency (1-way),Notes
+Closest Approach (direct),0.37 AU (55M km),~3.05 minutes,No relay needed
+Farthest (unblocked),2.52 AU,~21 minutes,Direct link still viable
+Conjunction (via relay),~3.2 AU total path,~27 minutes,Earth → relay → Mars

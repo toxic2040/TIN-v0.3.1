@@ -1,0 +1,9 @@
+Parameter,Specification
+Total Satellites,"5–6 (3 polar + 2–3 L-point: 1 at L4, 1 at L5, optional at L3 for redundancy)"
+Communications Availability,99.9%+ (conjunction-proof; based on orbital simulations with 120° phasing)
+Optical Bandwidth,"1–10 Gbps per link (scalable to 100s Gbps with arrays, per NASA DSOC roadmap)"
+Radio Backup Bandwidth,100–500 Mbps
+Minimum Latency (one-way),"~3 light-minutes (closest approach, direct)"
+Maximum Latency (one-way),"~27 light-minutes (conjunction, via relay)"
+Design Life,10+ years (with software upgrades)
+Coverage,"Earth, Moon, Mars (expandable to outer planets)"

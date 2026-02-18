@@ -1,0 +1,11 @@
+Subsystem,Specification
+Dry Mass,"1,500–2,000 kg (including 20–30% margin)"
+Propellant Mass,"200–500 kg (hydrazine/ion fuel, 10-year life)"
+Total Launch Mass,"1,700–2,500 kg per satellite"
+Power (Average),"7–10 kW (solar arrays, 20–30 m² BSR cells @ 29% eff., ~1361 W/m² at 1 AU)"
+Power (Peak),10–15 kW during high-bandwidth bursts
+Batteries,60–100 Ah Li-ion for eclipses
+Dimensions (Stowed),2–3 m core bus (fits Starship 9 m fairing)
+Dimensions (Deployed),10–15 m span (arrays + antennas)
+Propulsion,"Ion thrusters (0.1–0.5 N, Isp 3,000 s)"
+Attitude Control,Reaction wheels + star trackers (0.04° pointing)

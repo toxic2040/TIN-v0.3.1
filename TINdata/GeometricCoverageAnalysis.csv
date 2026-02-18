@@ -1,0 +1,4 @@
+Configuration,Coverage During Conjunction,Annual Availability,Notes/Source
+"3 Polar Relays (120° phased, 90° inclination)",>99% LOS to Earth/Mars,99.9%+,Simulations show overlap handles perturbations; per NSS 2007 (0.996 per relay)
++2 L-Point Hubs (L4/L5),100% supplementary,99.99%,Near-perpetual Earth view; per ScienceDirect 2023 (~99–100% with 3–4 relays)
+Full Network,Conjunction-proof,99.9%+,Geometric analysis across synodic cycle; expandable for outer planets

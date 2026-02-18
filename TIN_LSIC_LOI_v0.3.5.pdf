@@ -1,0 +1,43 @@
+**Letter of Interest – Lunar Surface Innovation Consortium (LSIC)**
+
+**Title:**  
+Tolerant Interlunar Network (TIN) v0.3.5: Hybrid Polar Relay Constellation + Lunar Pathfinder ELFO DTN/AI Hub for Continuous Artemis South Pole & Far-Side Communications
+
+**Principal Investigator / Independent Proposer:**  
+toxic2040  
+San Jose, CA  
+toxic2040@proton.me (or your preferred contact)
+
+**Date:** February 19, 2026
+
+**Abstract (148 words)**  
+TIN v0.3.5 delivers near-perfect lunar south-pole coverage (99.9–100.0 %) and a major far-side performance boost (63.2–68.5 %) using a minimal, low-cost hybrid architecture: 6–8 ESPA-class smallsats in 400 km circular 90° polar orbits combined with the existing Lunar Pathfinder in its frozen elliptical orbit (ELFO: a=5740 km, e=0.58, i=55°, perilune over south pole) as the primary intelligent DTN/AI routing hub.  
+
+28-day high-fidelity simulations (minimum elevation >5°) confirm the results. The polar constellation guarantees continuous south-pole service while ELFO perilune passes provide the critical far-side visibility boost — all built on real, already-funded assets. Combined with CCSDS DTN and AI routing, TIN enables reliable, high-resilience communications for Artemis Base Camp, commercial CLPS landers, PSR ISRU operations, and far-side science.
+
+This hybrid polar + frozen-elliptical + DTN/AI approach is deliberately generalizable to Mars, Venus, outer-planet moons, and solar-polar networks, offering NASA a scalable solar-system communications backbone.
+
+**Relevance to LSIC & Artemis**  
+Directly addresses LSIC Focus Area 4 (Communications & Navigation) and Artemis Strategic Knowledge Gap SKG-2 (Surface & Near-Surface Comms). Provides >99.9 % south-pole availability at < $50M total mission cost (rideshare + existing Pathfinder).  
+
+**Innovation & Impact**  
+- First use of real Lunar Pathfinder ELFO as active DTN/AI hub  
+- True 90° polar + frozen elliptical hybrid proven in simulation  
+- Open-source CLI tool + full dataset already released (GitHub: https://github.com/toxic2040/TIN-v0.3.1)  
+- Full technical memo (v0.3.5) with maps and results attached
+
+**Requested Next Steps**  
+We seek LSIC collaboration to:  
+1. Validate ION DTN bundle routing in hardware-in-the-loop  
+2. Refine SWaP-C model for ESPA-class implementation  
+3. Explore joint NIAC Phase I or CLPS rideshare opportunity  
+
+Full v0.3.5 Technical Memo (PDF) and simulation repository available immediately. Happy to present at the next LSIC telecon or provide raw data.
+
+**Attachments:**  
+- TIN_TechMemo_v0.3.5.pdf  
+- GitHub repository: https://github.com/toxic2040/TIN-v0.3.1  
+
+Thank you for advancing lunar surface innovation.  
+toxic2040  
+Independent Proposer

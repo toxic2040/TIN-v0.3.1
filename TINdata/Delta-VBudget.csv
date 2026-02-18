@@ -1,0 +1,5 @@
+Maneuver,Direct (Δv),With Gravity Assist
+LEO to Escape (C3=0),~3.2 km/s,~3.2 km/s
+Plane Change to ~90°,~5–7 km/s (at optimal radius),"~0 km/s (Jupiter GA, like Ulysses)"
+Halo Orbit Insertion,~0.1–0.5 km/s,~0.1–0.5 km/s
+Total per Satellite,~8.5–10.5 km/s,~3.5–7 km/s (VEEGA to Jupiter + GA)

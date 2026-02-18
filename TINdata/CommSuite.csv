@@ -1,0 +1,7 @@
+System,Radio (Ka/X-band),Optical Laser
+Antenna/Aperture,4–5 m deployable mesh,10–50 cm telescope
+Transmitter Power,100–500 W (TWTA amps),10–50 W input
+Bandwidth,100–500 Mbps (primary); 1–100 Mbps (emergency backup),1–10 Gbps (scalable to 100s Gbps)
+Mass,200–400 kg,50–100 kg additional
+Power Draw,100–500 W,200–600 W
+Redundancy,Dual antennas (Earth + Mars facing),SDR adaptive freq (2–60 GHz backup)

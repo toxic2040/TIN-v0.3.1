@@ -1,0 +1,4 @@
+Scenario,Total Cost,Assumptions
+Optimistic,~$2.1 Billion,"Minimal spares, no overruns, Starship mature"
+Realistic Mid-Range,~$2.5 – $3.0 Billion,"20% contingency, full redundancy"
+Pessimistic,~$3.5 – $4.0 Billion,"Delays, extended testing, cost overruns"

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Interplanetary Network — Orbital Visualization</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #030810;
+    color: #c8d8e8;
+    font-family: 'IBM Plex Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; }
+
+  .overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 2; pointer-events: none;
+  }
+
+  .title-block {
+    position: absolute; top: 28px; left: 36px;
+    pointer-events: auto;
+  }
+
+  .title-block h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900; font-size: 22px; letter-spacing: 6px;
+    color: #e0e8f0;
+    text-transform: uppercase;
+    text-shadow: 0 0 30px rgba(60,140,255,0.3);
+  }
+
+  .title-block .sub {
+    font-size: 10px; letter-spacing: 3px; color: #4a7aaa;
+    margin-top: 6px; text-transform: uppercase;
+  }
+
+  .stats-panel {
+    position: absolute; bottom: 28px; left: 36px;
+    pointer-events: auto;
+    display: flex; gap: 32px;
+  }
+
+  .stat {
+    display: flex; flex-direction: column;
+  }
+
+  .stat .label {
+    font-size: 9px; letter-spacing: 2.5px; color: #3a6a8a;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+
+  .stat .value {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700; font-size: 18px; color: #7ec8ff;
+    text-shadow: 0 0 12px rgba(100,180,255,0.4);
+  }
+
+  .stat .unit {
+    font-size: 10px; color: #4a7aaa; margin-top: 2px;
+  }
+
+  .legend {
+    position: absolute; top: 28px; right: 36px;
+    pointer-events: auto; text-align: right;
+  }
+
+  .legend-item {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px; justify-content: flex-end;
+  }
+
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-label {
+    font-size: 10px; letter-spacing: 1.5px; color: #6a8aaa;
+    text-transform: uppercase;
+  }
+
+  .control-panel {
+    position: absolute; bottom: 28px; right: 36px;
+    pointer-events: auto; display: flex; gap: 12px;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    background: rgba(30,60,100,0.3); border: 1px solid rgba(60,140,255,0.2);
+    color: #6aa8d8; padding: 8px 16px; cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn:hover {
+    background: rgba(40,80,140,0.4); border-color: rgba(80,160,255,0.5);
+    color: #a0d0ff; box-shadow: 0 0 15px rgba(60,140,255,0.15);
+  }
+
+  .btn.active {
+    background: rgba(60,140,255,0.15); border-color: rgba(80,160,255,0.6);
+    color: #a0d8ff;
+  }
+
+  .mission-clock {
+    position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
+    text-align: center; pointer-events: none;
+  }
+
+  .mission-clock .clock-label {
+    font-size: 8px; letter-spacing: 3px; color: #2a5a7a;
+    text-transform: uppercase;
+  }
+
+  .mission-clock .clock-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px; color: #4a8aba; letter-spacing: 3px;
+    margin-top: 3px;
+  }
+
+  .conjunction-warning {
+    position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
+    text-align: center; pointer-events: none;
+    opacity: 0; transition: opacity 0.8s;
+  }
+
+  .conjunction-warning.visible { opacity: 1; }
+
+  .conjunction-warning .warn-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px; letter-spacing: 4px; color: #ff6040;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255,80,40,0.5);
+    animation: pulse-warn 1.5s ease-in-out infinite;
+  }
+
+  .conjunction-warning .warn-sub {
+    font-size: 9px; color: #aa5040; letter-spacing: 2px; margin-top: 4px;
+  }
+
+  @keyframes pulse-warn {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .scanline {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 3; pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent, transparent 2px,
+      rgba(0,20,40,0.03) 2px, rgba(0,20,40,0.03) 4px
+    );
+  }
+
+  .vignette {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 3; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(3,8,16,0.7) 100%);
+  }
+
+  .credit {
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    font-size: 8px; letter-spacing: 2px; color: #1a3a5a;
+    text-transform: uppercase; z-index: 4; pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="overlay">
+  <div class="title-block">
+    <h1>The Interplanetary Network</h1>
+    <div class="sub">Heliocentric Relay Architecture &mdash; toxic2040</div>
+  </div>
+
+  <div class="mission-clock">
+    <div class="clock-label">Simulation Elapsed</div>
+    <div class="clock-value" id="missionClock">SOL 000 &middot; 00:00:00</div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-label">Sun</span>
+      <span class="legend-dot" style="background: #ffcc40; box-shadow: 0 0 8px #ffaa20;"></span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-label">Earth</span>
+      <span class="legend-dot" style="background: #4a90d9; box-shadow: 0 0 8px #4a90d9;"></span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-label">Mars</span>
+      <span class="legend-dot" style="background: #d9634a; box-shadow: 0 0 8px #d9634a;"></span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-label">Polar Relays</span>
+      <span class="legend-dot" style="background: #40e8c0; box-shadow: 0 0 8px #40e8c0;"></span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-label">L-Point AI Hubs</span>
+      <span class="legend-dot" style="background: #c080ff; box-shadow: 0 0 8px #c080ff;"></span>
+    </div>
+    <div class="legend-item">
+      <span class="legend-label">Active Relay Link</span>
+      <span class="legend-dot" style="background: #40ff90; box-shadow: 0 0 8px #40ff90;"></span>
+    </div>
+  </div>
+
+  <div class="stats-panel">
+    <div class="stat">
+      <span class="label">Network Status</span>
+      <span class="value" id="netStatus">ONLINE</span>
+      <span class="unit" id="netUptime">99.97% uptime</span>
+    </div>
+    <div class="stat">
+      <span class="label">Earth-Mars Latency</span>
+      <span class="value" id="latencyValue">4.2</span>
+      <span class="unit">light-minutes (one-way)</span>
+    </div>
+    <div class="stat">
+      <span class="label">Active Bandwidth</span>
+      <span class="value" id="bwValue">4.8</span>
+      <span class="unit">Gbps optical</span>
+    </div>
+    <div class="stat">
+      <span class="label">Relay Path</span>
+      <span class="value" id="relayPath">DIRECT</span>
+      <span class="unit" id="relayNote">No relay needed</span>
+    </div>
+  </div>
+
+  <div class="control-panel">
+    <button class="btn active" id="btnPlay">▶ Play</button>
+    <button class="btn" id="btnSpeed">1x Speed</button>
+    <button class="btn" id="btnConjunction">Skip to Conjunction</button>
+    <button class="btn" id="btnView">Top View</button>
+  </div>
+
+  <div class="conjunction-warning" id="conjWarn">
+    <div class="warn-text">⚠ Solar Conjunction Active</div>
+    <div class="warn-sub">Direct link blocked &mdash; routing via polar relay</div>
+  </div>
+</div>
+
+<div class="scanline"></div>
+<div class="vignette"></div>
+<div class="credit">TIN Architecture v0.1 &mdash; Concept Visualization</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let W, H, cx, cy, scale;
+let time = 0;
+let playing = true;
+let speedMult = 1;
+let viewAngle = 0; // 0 = top, 1 = angled
+let targetViewAngle = 0;
+
+const speeds = [1, 2, 5, 10];
+let speedIdx = 0;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  cx = W / 2;
+  cy = H / 2;
+  scale = Math.min(W, H) * 0.28;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Orbital parameters (AU, scaled)
+const AU = 1;
+const earthOrbit = 1 * AU;
+const marsOrbit = 1.52 * AU;
+const earthPeriod = 365.25; // days
+const marsPeriod = 687; // days
+
+// Stars
+const stars = [];
+for (let i = 0; i < 300; i++) {
+  stars.push({
+    x: Math.random() * 2 - 1,
+    y: Math.random() * 2 - 1,
+    z: Math.random(),
+    brightness: Math.random() * 0.5 + 0.1,
+    twinkleSpeed: Math.random() * 0.02 + 0.005
+  });
+}
+
+// Project 3D to 2D with perspective tilt
+function project(x, y, z) {
+  const tilt = viewAngle * 0.6; // max tilt
+  const cosT = Math.cos(tilt);
+  const sinT = Math.sin(tilt);
+  const py = y * cosT - z * sinT;
+  const pz = y * sinT + z * cosT;
+  const perspective = 1 / (1 + pz * 0.15);
+  return {
+    sx: cx + x * scale * perspective,
+    sy: cy + py * scale * perspective,
+    z: pz,
+    scale: perspective
+  };
+}
+
+function drawStars() {
+  stars.forEach(s => {
+    const flicker = Math.sin(time * s.twinkleSpeed) * 0.3 + 0.7;
+    const alpha = s.brightness * flicker;
+    ctx.fillStyle = `rgba(180,200,230,${alpha})`;
+    const sx = cx + s.x * W * 0.6;
+    const sy = cy + s.y * H * 0.6;
+    const sz = s.z * 1.5;
+    ctx.fillRect(sx, sy, sz, sz);
+  });
+}
+
+function drawOrbitEllipse(radius, color, alpha) {
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  for (let a = 0; a <= Math.PI * 2 + 0.1; a += 0.05) {
+    const x = Math.cos(a) * radius;
+    const y = Math.sin(a) * radius;
+    const p = project(x, y, 0);
+    if (a === 0) ctx.moveTo(p.sx, p.sy);
+    else ctx.lineTo(p.sx, p.sy);
+  }
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+}
+
+function drawGlow(sx, sy, radius, color, alpha) {
+  const grad = ctx.createRadialGradient(sx, sy, 0, sx, sy, radius);
+  grad.addColorStop(0, color.replace(')', `,${alpha})`).replace('rgb', 'rgba'));
+  grad.addColorStop(1, color.replace(')', ',0)').replace('rgb', 'rgba'));
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(sx, sy, radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawBody(x, y, z, radius, color, glowColor, glowSize) {
+  const p = project(x, y, z);
+  const r = radius * p.scale;
+
+  // Glow
+  drawGlow(p.sx, p.sy, glowSize * p.scale, glowColor, 0.3);
+  drawGlow(p.sx, p.sy, glowSize * 0.5 * p.scale, glowColor, 0.2);
+
+  // Body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(p.sx, p.sy, r, 0, Math.PI * 2);
+  ctx.fill();
+
+  return p;
+}
+
+function drawSatellite(x, y, z, color, label) {
+  const p = project(x, y, z);
+  const r = 3 * p.scale;
+
+  // Outer ring
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.5;
+  ctx.beginPath();
+  ctx.arc(p.sx, p.sy, r + 4, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // Dot
+  drawGlow(p.sx, p.sy, 12 * p.scale, color, 0.25);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(p.sx, p.sy, r, 0, Math.PI * 2);
+  ctx.fill();
+
+  return p;
+}
+
+function drawLaserLink(p1, p2, color, alpha, dashed) {
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = alpha;
+  ctx.lineWidth = 1;
+  if (dashed) ctx.setLineDash([4, 8]);
+  else ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.moveTo(p1.sx, p1.sy);
+  ctx.lineTo(p2.sx, p2.sy);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+
+  // Traveling pulse
+  const pulseT = (time * 0.003) % 1;
+  const px = p1.sx + (p2.sx - p1.sx) * pulseT;
+  const py = p1.sy + (p2.sy - p1.sy) * pulseT;
+  drawGlow(px, py, 6, color, alpha * 0.8);
+}
+
+function getEarthPos(t) {
+  const angle = (t / earthPeriod) * Math.PI * 2;
+  return { x: Math.cos(angle) * earthOrbit, y: Math.sin(angle) * earthOrbit, z: 0 };
+}
+
+function getMarsPos(t) {
+  const angle = (t / marsPeriod) * Math.PI * 2 + 0.8; // offset
+  return { x: Math.cos(angle) * marsOrbit, y: Math.sin(angle) * marsOrbit, z: 0 };
+}
+
+function getPolarRelayPos(t, index) {
+  // Polar orbits at ~1AU, 120° apart, inclined ~90°
+  const phase = (index / 3) * Math.PI * 2;
+  const orbitalPeriod = earthPeriod; // ~1 year at 1AU
+  const angle = (t / orbitalPeriod) * Math.PI * 2 + phase;
+  // Polar orbit: primarily in z-plane
+  const r = 1.0 * AU;
+  return {
+    x: Math.cos(angle) * r * 0.2,
+    y: Math.sin(angle) * r * 0.2,
+    z: Math.cos(angle + Math.PI / 3 * index) * r * 0.7
+  };
+}
+
+function getLPointPos(t, index) {
+  // L4/L5 of Sun-Earth system: 60° ahead and behind Earth
+  const earthAngle = (t / earthPeriod) * Math.PI * 2;
+  const offsets = [-Math.PI / 3, Math.PI / 3, Math.PI]; // L4, L5, L3-ish
+  const angle = earthAngle + offsets[index];
+  const r = earthOrbit;
+  return { x: Math.cos(angle) * r, y: Math.sin(angle) * r, z: 0 };
+}
+
+function dist3d(a, b) {
+  return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2 + (a.z - b.z) ** 2);
+}
+
+function isConjunction(earth, mars) {
+  // Check if Sun is roughly between Earth and Mars
+  const earthAngle = Math.atan2(earth.y, earth.x);
+  const marsAngle = Math.atan2(mars.y, mars.x);
+  let diff = Math.abs(earthAngle - marsAngle);
+  if (diff > Math.PI) diff = Math.PI * 2 - diff;
+  return diff > 2.9; // close to π = opposition... wait, conjunction is when they're on same side
+  // Actually conjunction = Sun between them = angles ~π apart
+}
+
+function angleDiff(a, b) {
+  let d = Math.abs(a - b);
+  if (d > Math.PI) d = Math.PI * 2 - d;
+  return d;
+}
+
+function checkConjunction(earth, mars) {
+  const ea = Math.atan2(earth.y, earth.x);
+  const ma = Math.atan2(mars.y, mars.x);
+  const diff = angleDiff(ea, ma);
+  // Conjunction when angle difference is close to π (opposite sides of sun)
+  return diff > 2.85;
+}
+
+function updateUI(earth, mars, conj) {
+  const d = dist3d(earth, mars);
+  const latency = (d * 8.32).toFixed(1); // light-minutes per AU
+
+  document.getElementById('latencyValue').textContent = latency;
+  document.getElementById('bwValue').textContent = conj ? '2.4' : (4 + Math.sin(time * 0.001) * 2).toFixed(1);
+
+  if (conj) {
+    document.getElementById('netStatus').textContent = 'RELAY';
+    document.getElementById('netStatus').style.color = '#ffaa40';
+    document.getElementById('netUptime').textContent = '99.97% uptime — relay active';
+    document.getElementById('relayPath').textContent = 'POLAR-2';
+    document.getElementById('relayNote').textContent = 'Routing via heliocentric relay';
+    document.getElementById('conjWarn').classList.add('visible');
+  } else {
+    document.getElementById('netStatus').textContent = 'ONLINE';
+    document.getElementById('netStatus').style.color = '#7ec8ff';
+    document.getElementById('netUptime').textContent = '99.97% uptime';
+    document.getElementById('relayPath').textContent = 'DIRECT';
+    document.getElementById('relayNote').textContent = 'No relay needed';
+    document.getElementById('conjWarn').classList.remove('visible');
+  }
+
+  // Mission clock
+  const sols = Math.floor(time);
+  const hrs = Math.floor((time % 1) * 24);
+  const mins = Math.floor(((time % 1) * 24 % 1) * 60);
+  const secs = Math.floor((((time % 1) * 24 % 1) * 60 % 1) * 60);
+  document.getElementById('missionClock').textContent =
+    `SOL ${String(sols).padStart(3, '0')} · ${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Background gradient
+  const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.7);
+  bgGrad.addColorStop(0, '#0a1525');
+  bgGrad.addColorStop(0.5, '#060e1a');
+  bgGrad.addColorStop(1, '#030810');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  drawStars();
+
+  // Smooth view transition
+  viewAngle += (targetViewAngle - viewAngle) * 0.03;
+
+  // Get positions
+  const earth = getEarthPos(time);
+  const mars = getMarsPos(time);
+  const polars = [0, 1, 2].map(i => getPolarRelayPos(time, i));
+  const lpoints = [0, 1, 2].map(i => getLPointPos(time, i));
+  const conj = checkConjunction(earth, mars);
+
+  // Draw orbit paths
+  drawOrbitEllipse(earthOrbit, 'rgba(74,144,217,0.15)', 1);
+  drawOrbitEllipse(marsOrbit, 'rgba(217,99,74,0.15)', 1);
+
+  // Draw Sun
+  const sunP = drawBody(0, 0, 0, 14, '#ffdd60', 'rgb(255,200,60)', 80);
+
+  // Solar exclusion zone (subtle)
+  if (conj) {
+    const earthP = project(earth.x, earth.y, earth.z);
+    const marsP = project(mars.x, mars.y, mars.z);
+    ctx.strokeStyle = 'rgba(255,80,40,0.1)';
+    ctx.lineWidth = 30;
+    ctx.beginPath();
+    ctx.moveTo(earthP.sx, earthP.sy);
+    ctx.lineTo(marsP.sx, marsP.sy);
+    ctx.stroke();
+    ctx.lineWidth = 1;
+  }
+
+  // Draw L-point hubs
+  const lpP = lpoints.map((lp, i) => {
+    const labels = ['L4', 'L5', 'L3'];
+    return drawSatellite(lp.x, lp.y, lp.z, '#c080ff', labels[i]);
+  });
+
+  // Draw Polar relays
+  const prP = polars.map((pr, i) => {
+    return drawSatellite(pr.x, pr.y, pr.z, '#40e8c0', `P${i + 1}`);
+  });
+
+  // Draw Earth
+  const earthP = drawBody(earth.x, earth.y, earth.z, 6, '#4a90d9', 'rgb(74,144,217)', 25);
+
+  // Draw Mars
+  const marsP = drawBody(mars.x, mars.y, mars.z, 5, '#d9634a', 'rgb(217,99,74)', 20);
+
+  // Draw communication links
+  if (conj) {
+    // Find best polar relay
+    let bestRelay = 0;
+    let bestScore = Infinity;
+    polars.forEach((pr, i) => {
+      const dE = dist3d(earth, pr);
+      const dM = dist3d(mars, pr);
+      if (dE + dM < bestScore) { bestScore = dE + dM; bestRelay = i; }
+    });
+
+    // Active relay links (bright)
+    drawLaserLink(earthP, prP[bestRelay], '#40ff90', 0.7, false);
+    drawLaserLink(prP[bestRelay], marsP, '#40ff90', 0.7, false);
+
+    // Blocked direct link
+    drawLaserLink(earthP, marsP, '#ff4030', 0.15, true);
+  } else {
+    // Direct link
+    drawLaserLink(earthP, marsP, '#40ff90', 0.5, false);
+  }
+
+  // Subtle links to L-points (always monitoring)
+  lpP.forEach(lp => {
+    drawLaserLink(earthP, lp, '#c080ff', 0.08, true);
+  });
+
+  // Labels
+  ctx.font = '500 10px "IBM Plex Mono"';
+  ctx.textAlign = 'center';
+
+  ctx.fillStyle = '#4a90d9';
+  ctx.fillText('EARTH', earthP.sx, earthP.sy - 14);
+
+  ctx.fillStyle = '#d9634a';
+  ctx.fillText('MARS', marsP.sx, marsP.sy - 12);
+
+  ctx.fillStyle = 'rgba(64,232,192,0.6)';
+  prP.forEach((p, i) => {
+    ctx.fillText(`PR-${i + 1}`, p.sx, p.sy - 10);
+  });
+
+  ctx.fillStyle = 'rgba(192,128,255,0.6)';
+  const lpLabels = ['L4 HUB', 'L5 HUB', 'L3 HUB'];
+  lpP.forEach((p, i) => {
+    ctx.fillText(lpLabels[i], p.sx, p.sy - 10);
+  });
+
+  updateUI(earth, mars, conj);
+
+  if (playing) time += 0.15 * speedMult;
+  requestAnimationFrame(draw);
+}
+
+// Controls
+document.getElementById('btnPlay').addEventListener('click', function () {
+  playing = !playing;
+  this.textContent = playing ? '▶ Play' : '❚❚ Pause';
+  this.classList.toggle('active', playing);
+});
+
+document.getElementById('btnSpeed').addEventListener('click', function () {
+  speedIdx = (speedIdx + 1) % speeds.length;
+  speedMult = speeds[speedIdx];
+  this.textContent = `${speedMult}x Speed`;
+});
+
+document.getElementById('btnConjunction').addEventListener('click', function () {
+  // Find next conjunction
+  let t = time;
+  for (let i = 0; i < 5000; i++) {
+    t += 1;
+    const e = getEarthPos(t);
+    const m = getMarsPos(t);
+    if (checkConjunction(e, m)) {
+      time = t - 20; // jump to just before
+      break;
+    }
+  }
+});
+
+document.getElementById('btnView').addEventListener('click', function () {
+  if (targetViewAngle < 0.5) {
+    targetViewAngle = 1;
+    this.textContent = 'Top View';
+  } else {
+    targetViewAngle = 0;
+    this.textContent = 'Angle View';
+  }
+});
+
+draw();
+</script>
+</body>
+</html>

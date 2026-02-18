@@ -1,0 +1,109 @@
+# Seed GitHub Issues for TIN
+# Copy-paste these into GitHub Issues to seed discussion and engagement.
+# Go to: https://github.com/toxic2040/TIN-Heliocentric-Relays/issues/new
+# ═══════════════════════════════════════════════════════════════════════
+
+────────────────────────────────────────
+ISSUE 1
+────────────────────────────────────────
+
+Title: Discussion: Polar heliocentric orbit vs. Lagrange point placement — trade-offs?
+
+Labels: discussion, technical
+
+Body:
+TIN proposes 3 satellites in polar heliocentric orbits (inclined ~90° to the ecliptic) to maintain line-of-sight around the Sun during conjunction.
+
+An alternative approach studied in the literature uses Sun-Earth L4/L5 Lagrange points, or "pearl constellations" of satellites in circular heliocentric orbits between Earth and Mars.
+
+**Open questions:**
+- What are the real delta-V costs of achieving and maintaining a polar heliocentric orbit vs. station-keeping at L4/L5?
+- Does the polar approach offer meaningfully better geometric coverage, or is it overkill for the conjunction problem?
+- Are there hybrid architectures worth considering?
+
+If you have background in orbital mechanics or have worked on relay topology studies, I'd love your input. All the coverage geometry data is in `data/GeometricCoverageAnalysis.csv`.
+
+
+────────────────────────────────────────
+ISSUE 2
+────────────────────────────────────────
+
+Title: Discussion: Optical (laser) vs. RF links for deep space relay — realistic in this decade?
+
+Labels: discussion, technical
+
+Body:
+TIN assumes 1–10 Gbps optical links between relay nodes, which is consistent with what NASA's LCRD and ESA's EDRS have demonstrated in near-Earth contexts.
+
+However, deep space optical comms at interplanetary distances face challenges:
+- Pointing accuracy at millions of km
+- Solar background noise near conjunction geometry
+- Technology readiness for autonomous optical terminals on small-bus satellites
+
+**Questions for the community:**
+- Is 1 Gbps realistic for a ~1 AU relay hop by 2032?
+- Should TIN spec a hybrid optical/RF architecture with RF fallback?
+- What's the current state of deep space optical terminal miniaturization?
+
+The comms suite specs are in `data/CommSuite.csv` if you want to check assumptions.
+
+
+────────────────────────────────────────
+ISSUE 3
+────────────────────────────────────────
+
+Title: Discussion: Cost model sanity check — is $2.5-3B realistic?
+
+Labels: discussion, cost
+
+Body:
+The current TIN cost model estimates ~$2.5–3B for the full 5-6 satellite network including launch, ground segment, and 5-year operations.
+
+For context:
+- NASA's TDRS satellites cost ~$400-800M each (older generation, much larger)
+- SpaceX Starlink v2 sats are estimated at ~$500K-1M each (mass production, LEO)
+- LCRD (single laser comm demo) cost ~$330M
+
+TIN sits somewhere between these — small constellation, deep space, but leveraging COTS components where possible.
+
+**Is the $2.5-3B figure in the right ballpark?** Cost breakdown is in `data/CostBreakdown.csv` and `data/TotalProgramCost.csv`.
+
+Looking for input from anyone with experience in mission costing, space systems procurement, or NewSpace economics.
+
+
+────────────────────────────────────────
+ISSUE 4
+────────────────────────────────────────
+
+Title: Wanted: Peer review of delta-V budget and launch vehicle selection
+
+Labels: help wanted, technical
+
+Body:
+The TIN proposal includes a delta-V budget for inserting relay satellites into polar heliocentric orbits and Lagrange positions. The data is in `data/Delta-VBudget.csv` and the launch vehicle trade study is in `data/LaunchVehicleComp.csv`.
+
+I'd appreciate a sanity check from anyone with astrodynamics experience:
+- Are the delta-V numbers reasonable for the proposed orbits?
+- Does the launch vehicle selection make sense given the mass/orbit requirements?
+- Are there gravity-assist trajectories that could significantly reduce delta-V?
+
+This is an open proposal and all feedback will be credited.
+
+
+────────────────────────────────────────
+ISSUE 5
+────────────────────────────────────────
+
+Title: How does TIN compare to SpaceX MarsLink and NASA's planned Mars relay?
+
+Labels: discussion, context
+
+Body:
+Several other efforts are targeting Earth-Mars communications:
+- **SpaceX MarsLink** — proposed Starlink-style constellation in Mars orbit
+- **NASA MNCS** — Mars Next-Generation Communication System studies
+- **ESA** — various Mars relay concepts via ExoMars and future missions
+
+TIN is complementary rather than competing — it solves the *heliocentric* relay problem (conjunction blackouts, in-transit comms) while MarsLink and MNCS focus on *Mars-local* coverage.
+
+**Discussion:** How should TIN position itself relative to these efforts? Is there an integration path where TIN becomes the backbone and MarsLink/MNCS handle local distribution?

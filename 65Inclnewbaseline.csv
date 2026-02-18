@@ -1,0 +1,8 @@
+### Recommended Baseline: 65° Inclination with 3 Polar Relays
+
+| Inclination | Relays | Geometric Coverage | Conjunctions Eliminated | Est. Total Δv (VEEGA + Jupiter GA) | Notes |
+|-------------|--------|--------------------|--------------------------|------------------------------------|-------|
+| 90°         | 3      | 100.00%            | Yes                      | 3.5–7 km/s                         | Ulysses heritage |
+| 70°         | 3      | 100.00%            | Yes                      | 3–6 km/s                           | Strong fallback |
+| **65°**     | **3**  | **100.00%**        | **Yes**                  | **2.5–5 km/s**                     | **New Baseline** |
+| 45°         | 4–5    | 99.97%             | Yes                      | 2–4 km/s                           | Extra margin |

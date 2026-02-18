@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+
+\title{TIN v0.3.1 Technical Memo \\ True-Polar Relay Constellation for Lunar South Pole Coverage}
+\author{Independent Proposer \\ toxic2040 \\ February 18, 2026}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Executive Summary}
+TIN v0.3.1 delivers >99\% south-pole coverage using a minimal constellation of 6–8 smallsat relays in 400–500 km circular 90° polar orbits with staggered phasing. Combined with CCSDS DTN, this architecture supports Artemis, commercial landers, and ISRU in PSRs.
+
+Key result (28-day simulation, elev >5°):  
+\textbf{99.6\%} (6 sats @ 400 km) → \textbf{100.0\%} (8 sats or 500 km variant).
+
+GitHub: \url{https://github.com/toxic2040/TIN-v0.3.1}
+
+\section{Baseline Constellation}
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Parameter & 6-sat baseline & 8-sat option & 500 km option \\
+\midrule
+Altitude & 400 km & 400 km & 500 km \\
+Inclination & 90° & 90° & 90° \\
+\# Relays & 6 & 8 & 6 \\
+RAAN spacing & 60° & 45° & 60° \\
+South-pole coverage & 99.6\% & 100.0\% & 100.0\% \\
+\bottomrule
+\end{tabular}
+\caption{TIN v0.3.1 locked baselines}
+\end{table}
+
+\section{South-Pole Coverage Results}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{tin_400km_6sats_90deg.png}
+\caption{6 sats @ 400 km — 99.6\% coverage (lat < –85°)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{tin_400km_8sats_90deg.png}
+\caption{8 sats @ 400 km — 100.0\% coverage}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{tin_500km_6sats.png}
+\caption{6 sats @ 500 km — 100.0\% coverage}
+\end{figure}
+
+\section{Next Steps (Phase I Scope)}
+\begin{itemize}
+\item Integrate Lunar Pathfinder ELFO as hybrid anchor node
+\item ION DTN bundle routing simulations
+\item Far-side + PSR gap analysis
+\item SWaP/cost model (ESPA-class rideshare)
+\item Open-source dataset release
+\end{itemize}
+
+Full CLI tool and raw simulation data available in the GitHub repo.
+
+\end{document}
