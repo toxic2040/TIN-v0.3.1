@@ -1,6 +1,6 @@
 # TIN — Tolerant Interplanetary Network
 
-**v0.3.8-final — Life-Saving Cislunar DTN Alpha**
+**v0.3.9 — Life-Saving Cislunar DTN Alpha**
 
 Critical emergency communication (medical alerts, rover aborts, distress signals) reaches the intelligent ELFO hub in **under 3.4 minutes worst-case**.
 
@@ -8,7 +8,7 @@ Compared to emerging lunar relay concepts like Intuitive Machines LDN or a hypot
 
 **Run it:**
 ```bash
-python tin_v0.3.8_final_integrated.py --polar_sats 8 --bundles 300 --storm_prob 0.08
+python scripts/tin_v0.3.8_final_intergrated.py --polar_sats 8 --bundles 300 --storm_prob 0.08
 
 
 # Tolerant Interlunar Network (TIN)
@@ -40,33 +40,33 @@ TIN builds directly on the Interplanetary Internet (IPN) and Delay-Tolerant Netw
 | **Hybrid 6 polar + Pathfinder** | **99.9** | **63.2** |
 | **Hybrid 8 polar + Pathfinder** | **100.0** | **68.5** |
 
-**Download full table:** [Quick_Summary_Table_tin_hybrid_polar.csv](Quick_Summary_Table_tin_hybrid_polar.csv)
+**Download full table:** [data/Quick_Summary_Table_results/tin_hybrid_polar.csv](data/Quick_Summary_Table_results/tin_hybrid_polar.csv)
 
 ### Coverage Maps (28-day avg, elev >5°)
 
 **South Pole — Hybrid 6 Polar + ELFO**
-![South Pole Coverage](tin_hybrid_6polar_ELFO_south.png)
+![South Pole Coverage](results/tin_hybrid_6polar_ELFO_south.png)
 
 **Far-Side — Hybrid 6 Polar + ELFO**
-![Far-Side 6 Polar](tin_hybrid_6polar_ELFO_far.png)
+![Far-Side 6 Polar](results/tin_hybrid_6polar_ELFO_far.png)
 
 **Far-Side — Hybrid 8 Polar + ELFO**
-![Far-Side 8 Polar](tin_hybrid_8polar_ELFO_far.png)
+![Far-Side 8 Polar](results/tin_hybrid_8polar_ELFO_far.png)
 
 ### Repository Contents
 
 ```
 README.md                          — This file
-TIN_TechMemo_v0.3.6.pdf           — Technical Memo (5-page, results + maps)
+docs/TIN_TechMemo_v0.3.6.pdf           — Technical Memo (5-page, results + maps)
 TIN_Lunar_Whitepaper_v0.3.6.md    — Lunar Technical Whitepaper (9-page)
 TIN_Mars_Whitepaper_v0.3.6.md     — Mars Generalization Whitepaper (5-page)
 TIN_Helio_Whitepaper_v0.3.6.md    — Solar-System Vision Whitepaper (6-page)
 TIN_LSIC_LOI_v0.3.6.md            — LSIC Letter of Intent
 PitchDeck_Outline_v0.3.6.md       — 10-slide pitch deck outline
 tin_coverage_map.py                — Simulation CLI tool
-Quick_Summary_Table_tin_hybrid_polar.csv — Full results table
-tin_hybrid_*.png                   — Coverage maps
-tin_400km_*.png                    — Pure polar coverage maps
+data/Quick_Summary_Table_results/tin_hybrid_polar.csv — Full results table
+results/tin_hybrid_*.png                   — Coverage maps
+results/tin_400km_*.png                    — Pure polar coverage maps
 archive/                           — Previous version files
 ```
 
