@@ -1,0 +1,10 @@
+{
+  "version": "0.3.8-final",
+  "delivery_pct": 100.0,
+  "overall_avg_h": 0.03,
+  "emergency_avg_min": 1.6,
+  "emergency_worst_min": 3.8,
+  "south_pole_coverage_pct": 100.0,
+  "polar_touches": 300,
+  "timestamp": "2026-02-19"
+}
