@@ -4,7 +4,22 @@ All notable changes to this project will be documented in this file.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
+## [0.3.9] — 2026-02-19
+### Added
+- Professional repository reorganization: top-level `scripts/`, `data/`, `docs/`, `results/`, `simulations/`, and `archive/` directories.
+- MIT LICENSE and `requirements.txt`.
+- Official `TIN_v0.3.9_OnePager.pdf` in `docs/`.
+- Fresh 100 % South Pole coverage simulation results (map + JSON in `results/`).
 
+### Changed
+- Complete repo scrub and restructuring into clean engineering-grade layout.
+- Updated README.md and all internal file paths to new directory structure.
+- Moved legacy v0.3.8 files + old OnePager into `archive/`.
+
+### Other
+- Submitted official feedback to NASA 2026 STMD Civil Space Shortfalls (tied to DUSTER / Artemis south-pole comms).
+- Requested LSIC wiki access.
+- Posted low-key project update on X.
 ## [0.3.1] — 2026-02-17
 
 ### Changed
