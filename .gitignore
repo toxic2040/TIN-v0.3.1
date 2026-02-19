@@ -1,17 +1,47 @@
 # Python
+venv*/
 venv_tin/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+*.so
 
-# LaTeX build artifacts
-*.aux
+# Virtual environments
+.env
+.venv
+env/
+ENV/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary / Logs
 *.log
+*.tmp
+
+# Results (optional — keep tracked for now, uncomment if you want to ignore large images later)
+# results/*.png
+
+# Old stuff we already archived
+archive/old_versions/
+
+# LaTeX build artifacts (missed in previous version)
+*.aux
 *.out
 
-# Old versions and working files
-TINDocs/
-TINFiles/
-TINprojectv0.1/
-TIN-Heliocentric-Relays/
-filesOdd/
+# Backups and temp files
 *.backup
+*.tmp.bak
+
+# Ignore the backup we just created
+.gitignore.old
