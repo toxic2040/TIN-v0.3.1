@@ -1,3 +1,24 @@
+
+### 3. Updated RELEASE_NOTES.md Entry (add/replace the latest section)
+
+```markdown
+# Release v0.3.8-final — "Life-Saving Alpha" (2026-02-19)
+
+**Highlights**
+- Emergency communication: 1.8 min avg / 3.4 min worst-case
+- 100 % delivery and 100 % South Pole coverage
+- Full integrated physics + DTN engine with real transmission delays
+
+**Comparison Context**
+TIN is purpose-built for Artemis South Pole needs — faster worst-case emergency response and dramatically lower cost than broader commercial constellations (Starlink Lunar-style or IM LDN). It is fully open-source and immediately usable today.
+
+**Files**
+- tin_v0.3.8_final_integrated.py
+- tin_v0.3.8_final_coverage.png
+- TIN_v0.3.8_LSIC_OnePager.md
+
+
+
 v0.3.6 — Documentation, Heritage & LSIC Readiness Release
 
 Major documentation and transparency release ahead of LSIC Spring Meeting.

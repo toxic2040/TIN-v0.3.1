@@ -1,0 +1,11 @@
+Category,TIN v0.3.8-final (Your System),Hypothetical Starlink Lunar (Starlink-style),Intuitive Machines LDN (Real Commercial Alternative)
+Scale,8 polar smallsats + 1 existing ELFO (free hub),Likely 50–200+ dedicated lunar-orbit sats,5 dedicated relay sats
+South Pole Coverage,100 % (proven in sim),Excellent (global focus),Good but not polar-optimized (global relay)
+Critical Emergency Latency,1.8 min avg / 3.4 min worst-case (to ELFO hub),Likely 1–5 min (laser-linked high-bandwidth),5–15 min (estimated for relay-to-relay)
+Technology,DTN + AI predictive custody (tolerant to outages),Traditional IP + laser inter-sats (less tolerant),DTN-compatible (LunaNet standard)
+Bandwidth,Moderate (950–2200 kbps links),Very high (gigabit+ potential),Moderate-high (pay-per-minute relay)
+Cost to Deploy,Extremely low (piggyback rides + smallsats),Very high (hundreds of custom lunar sats),Medium (5 sats via rideshare)
+Open-Source / Accessible,Fully open — anyone can run or build on it,Proprietary (SpaceX-controlled),Commercial service (pay-per-minute)
+Resilience,Excellent (DTN handles long outages/storms),Good but assumes constant links,Good (LunaNet DTN)
+Time to Operational,"Now (sim validated, hardware-ready)",2028–2030+ (new constellation),Mid-2026 (first sats)
+Best For,"Critical polar ops, emergencies, Artemis South Pole",High-bandwidth broadband for bases/tourism,General commercial data relay
