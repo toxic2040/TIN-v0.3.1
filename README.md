@@ -1,5 +1,7 @@
 # TIN — Tolerant Interplanetary Network
 
+> **This repository is archived.** Active development continues at [TIN](https://github.com/toxic2040/TIN).
+
 **v0.3.9 — Life-Saving Cislunar DTN Alpha**
 
 Critical emergency communication (medical alerts, rover aborts, distress signals) reaches the intelligent ELFO hub in **under 3.4 minutes worst-case**.
@@ -17,8 +19,7 @@ python scripts/tin_v0.3.8_final_intergrated.py --polar_sats 8 --bundles 300 --st
 
 Hybrid Polar + Lunar Pathfinder ELFO architecture for persistent South Pole and far-side lunar coverage using DTN + AI routing. Lunar demonstrator for a generalizable solar-system tolerant network.
 
-**Author:** Joe Councilman (tc), Independent Researcher, San Jose, CA
-**Contact:** toxic2040@yahoo.com
+**Author:** J. Councilman
 **LSIC Member — Crosscutting Capabilities Focus Group**
 
 ---

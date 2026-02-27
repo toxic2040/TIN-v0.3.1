@@ -3,9 +3,8 @@
 **Title:**  
 Tolerant Interlunar Network (TIN) v0.3.5: Hybrid Polar Relay Constellation + Lunar Pathfinder ELFO DTN/AI Hub for Continuous Artemis South Pole & Far-Side Communications
 
-**Principal Investigator / Independent Proposer:**  
-toxic2040  
-San Jose, CA  
+**Principal Investigator / Independent Proposer:**
+J. Councilman (toxic2040)
 toxic2040@proton.me
 
 **Date:** February 19, 2026

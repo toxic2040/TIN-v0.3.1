@@ -1,7 +1,7 @@
 **Tolerant Interlunar Network (TIN) v0.3.6**  
 **Hybrid Polar + ELFO Architecture for Persistent Lunar Coverage**
 
-**Author:** tc (toxic2040), Independent Researcher, San Jose, CA  
+**Author:** J. Councilman (toxic2040)  
 **Date:** 19 February 2026  
 **GitHub:** https://github.com/toxic2040/TIN-v0.3.1  
 
