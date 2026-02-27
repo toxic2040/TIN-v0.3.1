@@ -5,7 +5,7 @@ Slide 1: Title
 Tolerant Interlunar Network (TIN) v0.3.5
 Hybrid Polar + ELFO Architecture
 Continuous South-Pole Coverage & Far-Side Extension for Artemis
-tc (toxic2040) – Independent Researcher, San Jose, CA
+J. Councilman (toxic2040)
 19 February 2026
 GitHub: https://github.com/toxic2040/TIN-v0.3.1
 (Visual: TIN logo + small lunar globe with constellation)
@@ -89,4 +89,4 @@ Alignment discussion with NIAC/SCaN teams
 Full technical memo, datasets, and maps delivered within 48 hours of acceptance.
 Let’s build the tolerant network Artemis needs.
 Thank you. Questions?
-tc (toxic2040) – San Jose, CA
+J. Councilman (toxic2040)

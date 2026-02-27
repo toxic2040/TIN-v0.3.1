@@ -3,7 +3,7 @@
 
 **Date:** 19 February 2026  
 **Submitted to:** LSIC Steering Committee – Access-to-Space & Communications Working Groups  
-**Contact:** tc (toxic2040), Independent Researcher, San Jose, CA  
+**Contact:** J. Councilman (toxic2040), toxic2040@proton.me  
 **GitHub:** https://github.com/toxic2040/TIN-v0.3.1 (v0.3.6 released today)  
 **Full Package:** TIN_TechMemo_v0.3.6.pdf + Lunar/Mars/Helio Whitepapers + Pitch Deck Outline (attached or linked below)
 
@@ -43,8 +43,6 @@ TIN’s hybrid DTN/AI core is built for plug-and-play extension beyond the Moon.
 
 Thank you for your leadership. I look forward to contributing as a new LSIC participant.
 
-Best regards,  
-tc (toxic2040)  
-Independent Researcher  
-San Jose, California  
-toxic2040 (X) | GitHub: toxic2040
+Best regards,
+J. Councilman (toxic2040)
+toxic2040@proton.me | GitHub: toxic2040
