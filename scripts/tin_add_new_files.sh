@@ -5,7 +5,7 @@
 # ═══════════════════════════════════════════════════════════════
 #
 # BEFORE RUNNING:
-#   1. Download these files from our Claude chat and put them
+#   1. Download these files and put them
 #      in your repo folder (same folder as README.md):
 #        - CHANGELOG.md
 #        - CONTRIBUTING.md
@@ -35,14 +35,14 @@ if [ -f "CHANGELOG.md" ]; then
     echo "✅ Found CHANGELOG.md"
     FOUND=$((FOUND + 1))
 else
-    echo "⚠️  CHANGELOG.md not found in repo root — download it from Claude chat"
+    echo "⚠️  CHANGELOG.md not found in repo root — download it first"
 fi
 
 if [ -f "CONTRIBUTING.md" ]; then
     echo "✅ Found CONTRIBUTING.md"
     FOUND=$((FOUND + 1))
 else
-    echo "⚠️  CONTRIBUTING.md not found in repo root — download it from Claude chat"
+    echo "⚠️  CONTRIBUTING.md not found in repo root — download it first"
 fi
 
 # Handle data/README.md — check both locations
@@ -59,13 +59,13 @@ elif [ -f "data/README.md" ]; then
     echo "✅ data/README.md already exists"
     FOUND=$((FOUND + 1))
 else
-    echo "⚠️  data_README.md not found — download it from Claude chat"
+    echo "⚠️  data_README.md not found — download it first"
 fi
 
 echo ""
 
 if [ $FOUND -eq 0 ]; then
-    echo "❌ No new files found. Download them from the Claude chat first."
+    echo "❌ No new files found. Download them first."
     echo "   They should be in your Downloads folder — copy them here:"
     echo "     cp ~/Downloads/CHANGELOG.md ~/Downloads/CONTRIBUTING.md ~/Downloads/data_README.md ."
     exit 1
@@ -102,5 +102,5 @@ echo "  1. Go to https://github.com/toxic2040/TIN-Heliocentric-Relays/releases/n
 echo "     Tag: v0.3 | Title: TIN v0.3 — Simulation & Validation"
 echo "  2. Go to repo Settings → About (gear icon) → add Topics:"
 echo "     mars, deep-space, interplanetary, relay-satellite, space-communications"
-echo "  3. Open 3-5 Issues using the SEED_ISSUES.txt file from Claude"
+echo "  3. Open 3-5 Issues using the SEED_ISSUES.txt file"
 echo ""

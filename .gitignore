@@ -45,3 +45,6 @@ archive/old_versions/
 
 # Ignore the backup we just created
 .gitignore.old
+
+# Claude Code config
+.claude/
